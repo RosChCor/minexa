@@ -25,23 +25,33 @@
     </tr>
     </thead>
     <tbody>
-    {{ $c }}
+    
     @php $a = $c ->id;
     $sw = 1;
     @endphp
     @foreach($dps as $dp)
         
-        @if($c->id != $dp->id)
+        @if($a == $dp->id and $sw ==1)
         <tr>
-            <td>{{ $dp -> id }}</td>
-            <td>{{ $dp -> proveedor }}</td>
+            <td><b>{{ $dp -> id }}</b></td>
+            <td><b>{{ $dp -> proveedor }}</b></td>
+            <td></td><td></td><td></td>
         </tr>
+            @php 
+            $sw = 0;
+            @endphp
         @else
-        <tr> <td></td><td></td>   
+        <tr> <td></td><td></td>
             <td>{{ $dp -> descuento }}</td>
             <td>{{ $dp -> porcentaje }}</td>
             <td>{{ $dp -> descuento_fijo }}</td>
         </tr>
+        @endif
+        @if($a != $dp->id)
+            @php
+            $a = $dp->id;
+            $sw = 1;
+            @endphp
         @endif
      @endforeach
     
